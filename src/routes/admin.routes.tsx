@@ -1,9 +1,11 @@
 import { ReactNode } from "react";
-import AdminDashboard from "../pages/admin/adminDashboard";
+
 import CreateAdmin from "../pages/admin/CreateAdmin";
-import CreateFaculty from "../pages/admin/createFaculty";
+
 import CreateStudent from "../pages/admin/CreateStudent";
 import { NavLink } from "react-router-dom";
+import AdminDashboard from "../pages/admin/AdminDashboard";
+import CreateFaculty from "../pages/admin/CreateFaculty";
 
 // Define the route type for adminRoutes
 interface Route {
@@ -30,7 +32,7 @@ export const adminRoutes: Route[] = [
   {
     name: "Dashboard",
     path: "dashboard",
-    element: <AdminDashboard />,
+    element: <AdminDashboard/>,
   },
   {
     name: "User Management",
@@ -38,12 +40,12 @@ export const adminRoutes: Route[] = [
       {
         name: "Create Student",
         path: "create-student",
-        element: <CreateStudent />,
+        element: <CreateStudent/>,
       },
       {
         name: "Create Faculty",
         path: "create-faculty",
-        element: <CreateFaculty />,
+        element: <CreateFaculty/>,
       },
       {
         name: "Create Admin",

@@ -9,8 +9,8 @@ const MainLayout = () => {
     return (
         <Layout style={{height:'100vh'}}>
         <Sider
-            style={{padding:"7px"}}
-          width={250} // Use width prop instead of style
+          style={{padding:"7px"}}
+          width={250} // Using width prop instead of style
           breakpoint="lg"
           collapsedWidth="0"
           onBreakpoint={(broken) => {

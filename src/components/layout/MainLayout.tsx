@@ -1,4 +1,5 @@
 import { Layout, Menu, MenuProps } from "antd";
+import { Outlet } from "react-router-dom";
 const {Content, Footer, Header,Sider} = Layout;
 const MainLayout = () => {
  
@@ -30,6 +31,8 @@ const MainLayout = () => {
     return (
         <Layout style={{height:'100vh'}}>
         <Sider
+            style={{padding:"7px"}}
+          width={250} // Use width prop instead of style
           breakpoint="lg"
           collapsedWidth="0"
           onBreakpoint={(broken) => {
@@ -41,7 +44,7 @@ const MainLayout = () => {
         >
 
         
-          <div style={{display:"flex",border:"1px solid gray",width:"32vw",gap:"5px", justifyContent:"center",marginTop:"5px",marginLeft:"15px", alignItems:"center"}}>
+          <div style={{display:"flex",border:"1px solid gray",width:"32vw",gap:"5px", justifyContent:"center",marginLeft:"15px", alignItems:"center"}}>
             <img style={{height:"3rem"}} src="https://i.postimg.cc/65b2dDg7/iconUni.jpg" alt="" />
             <div style={{color:"gray",width:"50vw",fontSize: "2rem"}}>Horizon University Management System</div>
           </div>
@@ -57,6 +60,7 @@ const MainLayout = () => {
               }}
             >
               <h1>Main Content Here</h1>
+              <Outlet/>
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>

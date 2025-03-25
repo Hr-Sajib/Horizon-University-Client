@@ -1,32 +1,10 @@
 import { Layout, Menu, MenuProps } from "antd";
 import { Outlet } from "react-router-dom";
+import { adminSidebarItems } from "../../routes/admin.routes";
 const {Content, Footer, Header,Sider} = Layout;
 const MainLayout = () => {
  
-    const items : MenuProps['items'] = [
-        {
-            key: "k1",
-            label: 'Dashboard'
-        },
-        {
-            key: "k2",
-            label: 'Profile',
-        },
-        {
-            key: "k3",
-            label: 'Users',
-            children:[
-                {
-                    key:"k3c1",
-                    label:"Create User"
-                },
-                {
-                    key:"k3c2",
-                    label:"Delete User"
-                },
-            ]
-        },
-    ]
+    const items : MenuProps['items'] = adminSidebarItems;
 
     return (
         <Layout style={{height:'100vh'}}>
@@ -44,9 +22,9 @@ const MainLayout = () => {
         >
 
         
-          <div style={{display:"flex",border:"1px solid gray",width:"32vw",gap:"5px", justifyContent:"center",marginLeft:"15px", alignItems:"center"}}>
+          <div style={{display:"flex",border:"1px solid gray",width:"11rem",gap:"5px", justifyContent:"center",marginLeft:"15px", alignItems:"center"}}>
             <img style={{height:"3rem"}} src="https://i.postimg.cc/65b2dDg7/iconUni.jpg" alt="" />
-            <div style={{color:"gray",width:"50vw",fontSize: "2rem"}}>Horizon University Management System</div>
+            <div style={{color:"gray",width:"50vw",fontSize: "2rem"}}>Horizon</div>
           </div>
           <Menu style={{marginTop:"25px",fontSize: "1.2rem"}} theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} />
         </Sider>

@@ -11,7 +11,7 @@ export interface TRoute {
   // Define the output type for newArray
 export interface TNewRoute {
     path: string;
-    Element: ReactNode; // Use JSX.Element for React components
+    element: ReactNode; // Use JSX.Element for React components
   }
 
   

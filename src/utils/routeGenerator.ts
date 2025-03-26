@@ -5,7 +5,7 @@ export const routeGenerator = (adminRoutes : TRoute[]) => {
         if (item.path && item.element) {
           acc.push({
             path: item.path,
-            Element: item.element, // Directly use the JSX element
+            element: item.element, // Directly use the JSX element
           });
         }
         if (item.children) {
@@ -13,7 +13,7 @@ export const routeGenerator = (adminRoutes : TRoute[]) => {
             if (child.path && child.element) {
               acc.push({
                 path: child.path,
-                Element: child.element, // Directly use the JSX element
+                element: child.element, // Directly use the JSX element
               });
             }
           });

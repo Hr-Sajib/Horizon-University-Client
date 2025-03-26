@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useAppDispatch } from "../redux/hooks";
 import { setUser } from "../redux/features/auth/authSlice";
+import { verifyToken } from "../utils/verifyToken";
 
 const Login = () => {
     const {register, handleSubmit} = useForm({
@@ -22,11 +23,12 @@ const Login = () => {
         const result = await login(userInfo).unwrap();
         console.log(result)
 
-        dispatch(setUser({user:{}, token: result.data.accessToken}))
+        const decodedUser = verifyToken(result.data.accessToken);
+        console.log("decodedUser ",decodedUser)
+        dispatch(setUser({user:decodedUser, token: result.data.accessToken}))
         
     }
-
-
+ 
 
 
     return (

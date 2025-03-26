@@ -1,33 +1,15 @@
-import { Layout, Menu, MenuProps } from "antd";
+import { Layout, MenuProps } from "antd";
 import { Outlet } from "react-router-dom";
-import { adminSidebarItems } from "../../routes/admin.routes";
-const {Content, Footer, Header,Sider} = Layout;
+import Sidebar from "./Sidebar";
+const {Content, Footer, Header} = Layout;
+
+
 const MainLayout = () => {
  
-    const items : MenuProps['items'] = adminSidebarItems;
 
     return (
         <Layout style={{height:'100vh'}}>
-        <Sider
-          style={{padding:"7px"}}
-          width={250} // Using width prop instead of style
-          breakpoint="lg"
-          collapsedWidth="0"
-          onBreakpoint={(broken) => {
-            console.log(broken);
-          }}
-          onCollapse={(collapsed, type) => {
-            console.log(collapsed, type);
-          }}
-        >
-
-        
-          <div style={{display:"flex",border:"1px solid gray",width:"11rem",gap:"5px", justifyContent:"center",marginLeft:"15px", alignItems:"center"}}>
-            <img style={{height:"3rem"}} src="https://i.postimg.cc/65b2dDg7/iconUni.jpg" alt="" />
-            <div style={{color:"gray",width:"50vw",fontSize: "2rem"}}>Horizon</div>
-          </div>
-          <Menu style={{marginTop:"25px",fontSize: "1.2rem"}} theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items} />
-        </Sider>
+        <Sidebar/>
         <Layout>
           <Header style={{ padding: 0 }} />
           <Content style={{ margin: '24px 16px 0' }}>
@@ -41,9 +23,6 @@ const MainLayout = () => {
               <Outlet/>
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>
-            Ant Design ©{new Date().getFullYear()} Created by Ant UED
-          </Footer>
         </Layout>
       </Layout>
   );

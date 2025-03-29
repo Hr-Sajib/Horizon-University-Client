@@ -1,14 +1,13 @@
 import CreateAdmin from "../pages/admin/CreateAdmin";
 import CreateStudent from "../pages/admin/CreateStudent";
 import AdminDashboard from "../pages/admin/AdminDashboard";
-import CreateFaculty from "../pages/admin/CreateFaculty";
 import { TRoute } from "../types/sideBar.type";
-import AcademicSemesters from "../pages/admin/academicManagement/academicSemesters";
 import CreateAcademicSemesters from "../pages/admin/academicManagement/CreateAcademicSemesters";
 import AcademicDepartments from "../pages/admin/academicManagement/AcademicDepartments";
 import CreateAcademicDepartment from "../pages/admin/academicManagement/CreateAcademicDepartment";
 import AcademicFaculties from "../pages/admin/academicManagement/AcademicFaculties";
 import CreateAcademicFaculty from "../pages/admin/academicManagement/CreateAcademicFaculty";
+import AcademicSemesters from "../pages/admin/academicManagement/AcademicSemesters";
 
 
 export const adminRoutes: TRoute[] = [
@@ -59,11 +58,6 @@ export const adminRoutes: TRoute[] = [
         name: "Create Student",
         path: "create-student",
         element: <CreateStudent/>,
-      },
-      {
-        name: "Create Faculty",
-        path: "create-faculty",
-        element: <CreateFaculty/>,
       },
       {
         name: "Create Admin",

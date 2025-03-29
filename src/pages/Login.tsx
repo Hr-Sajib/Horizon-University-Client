@@ -7,57 +7,58 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import HUForm from "../components/form/HUForm";
 import HUInput from "../components/form/HUInput";
+import { Button, Row } from "antd";
 
 const Login = () => {
     const navigate = useNavigate();
-    // const {register, handleSubmit} = useForm({
-    //     defaultValues:{
-    //         id: 'A-001',
-    //         password: "adminpassword"
-    //     }
-    // });
-
 
     const [login, {error}] = useLoginMutation()
     const dispatch = useAppDispatch();
+    
+    const defaultFormValues = {
+      id: 'A-001',
+      password: "adminpassword"
+    }
 
     const onSubmit = async(data : FieldValues) => {
 
-      console.log(data)
-        // const toastId = toast.loading("Logging in")
-        
-        // try{
-        //     const userInfo = {
-        //         id: data.id,
-        //         password: data.password
-        //     }
-        //     const result = await login(userInfo).unwrap();
-        //     console.log(result)
-    
-        //     const decodedUser = verifyToken(result.data.accessToken) as TUser;
-        //     console.log("decodedUser ",decodedUser)
-        //     dispatch(setUser({user:decodedUser, token: result.data.accessToken}))
-        //     toast.success("Logged in", {id:toastId})
 
-        //     navigate(`/${decodedUser.role}/dashboard`)
-        // }
-        // catch(err){
-        //     toast.error("Something went wrong!",{id:toastId})
-        // }
+        const toastId = toast.loading("Logging in")
+        
+        try{
+            const userInfo = {
+                id: data.id,
+                password: data.password
+            }
+            const result = await login(userInfo).unwrap();
+            console.log(result)
+    
+            const decodedUser = verifyToken(result.data.accessToken) as TUser;
+            console.log("decodedUser ",decodedUser)
+            dispatch(setUser({user:decodedUser, token: result.data.accessToken}))
+            toast.success("Logged in", {id:toastId})
+
+            navigate(`/${decodedUser.role}/dashboard`)
+        }
+        catch(err){
+            toast.error("Something went wrong!",{id:toastId})
+        }
     }
  
-
+ 
 
     return (
-        <HUForm onSubmit={onSubmit}>
+        <Row justify="center"align="middle" style={{height:"100vh"}} >
+          <HUForm defaultFormValues={defaultFormValues} onSubmit={onSubmit}>
             <div>
                 <HUInput type='text' name='id' label='id'/>
             </div>
-            <div>
+            <div style={{marginTop:"10px"}}>
                 <HUInput type='text' name='password' label='password'/>
             </div>
-            <input type="submit" value="Login" />
-        </HUForm>
+            <Button htmlType="submit" style={{marginTop:"10px"}}>Login</Button>
+          </HUForm>
+        </Row>
     );
 };
 export default Login;

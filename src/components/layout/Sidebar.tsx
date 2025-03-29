@@ -45,8 +45,9 @@ export const Sidebar = () => {
 
     return (
         <Sider
-          style={{padding:"2px", paddingTop:"40px"}}
-          width={250}
+          style={{padding:"2px", paddingTop:"40px",height:"100vh", position:"sticky", top:"0", left:"0"}}
+          width={300}
+          
         >
           <Menu style={{marginTop:"25px",fontSize: "1rem"}} theme="dark" mode="inline" defaultSelectedKeys={['4']} items={sideBarItems} />
         </Sider>

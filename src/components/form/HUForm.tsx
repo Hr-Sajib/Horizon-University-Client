@@ -1,19 +1,36 @@
-import { FieldValues, FormProvider, useForm } from "react-hook-form";
+import { Form } from "antd";
+import { ReactNode } from "react";
+import { FieldValues, FormProvider, SubmitHandler, useForm } from "react-hook-form";
 
 interface HUFormProps {
-  onSubmit: (data: FieldValues) => void;
-  children: React.ReactNode;
+  onSubmit: SubmitHandler<FieldValues>;
+  children: ReactNode;
+  defaultFormValues?: Record<string, any>,
+  resolver?: any
+
 }
 
+type TFormConfig = {
+  defaultValues ?: Record<string, any>
+  resolver?: any
+}
 
-const HUForm = ({ onSubmit, children }: HUFormProps) => {
+const HUForm = ({ onSubmit, children, defaultFormValues, resolver }: HUFormProps) => {
 
-  const methods = useForm({defaultValues:{
-            // id: 'A-001',
-            // password: "adminpassword"
-        }});
+  const formConfig : TFormConfig = {}
 
-  return <FormProvider {...methods}><form onSubmit={methods.handleSubmit(onSubmit)}>{children}</form></FormProvider>;
+  if(defaultFormValues){
+    formConfig['defaultValues'] = defaultFormValues;
+  }
+  if(resolver){
+    formConfig['resolver'] = resolver;
+  }
+
+  const methods = useForm(formConfig);
+
+  return <FormProvider {...methods}>
+            <Form layout="vertical" onFinish={methods.handleSubmit(onSubmit)}>{children}</Form>
+          </FormProvider>;
 };
 
 export default HUForm;

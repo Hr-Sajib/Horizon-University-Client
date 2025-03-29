@@ -5,23 +5,45 @@ import HUSelect from "../../../components/form/HUSelect";
 import {zodResolver} from "@hookform/resolvers/zod"
 import { monthOptions, nameOptions, yearOptions } from "./academic.constants";
 import { createAcdemicSemesterValidationSchema } from "../../../schemas/createAcdemicSemesterValidationSchema";
+import { useCreateSemesterMutation } from "../../../redux/features/admin/academicManagement";
+import { toast } from "sonner";
+import { useAppSelector } from "../../../redux/hooks";
+import { selectCurrentToken } from "../../../redux/features/auth/authSlice";
 
 const CreateAcademicSemesters = () => {
 
+  const [addAcademicSemester] = useCreateSemesterMutation();
 
-  const onSubmit : SubmitHandler<FieldValues> = (data) => {
+  const token = useAppSelector(selectCurrentToken);
+  console.log(token)
+
+
+
+  const onSubmit : SubmitHandler<FieldValues> = async(data) => {
 
     const name = nameOptions[Number(data?.name)-1]?.label
 
     const semesterData = {
       name: name,
       code: data.name ,
-      year:  data.year 
+      year:  data.year ,
+      startMonth: data.startMonth,
+      endMonth: data.endMonth,
     }
 
      console.log(semesterData)
-  } 
 
+     try{
+      const res = await addAcademicSemester(semesterData);
+      console.log("res: ",res)
+     }
+     catch(err){
+      console.log(err)
+      toast("Somethis went wrong!")
+     }
+
+
+  } 
 
  
   return (

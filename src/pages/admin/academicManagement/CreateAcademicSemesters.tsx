@@ -8,19 +8,16 @@ import { createAcdemicSemesterValidationSchema } from "../../../schemas/createAc
 import { useCreateSemesterMutation } from "../../../redux/features/admin/academicManagement";
 import { toast } from "sonner";
 import { useAppSelector } from "../../../redux/hooks";
-import { selectCurrentToken } from "../../../redux/features/auth/authSlice";
+import { selectCurrentToken, selectCurrentUser } from "../../../redux/features/auth/authSlice";
+import { TResponse } from "../../../types/global";
 
 const CreateAcademicSemesters = () => {
 
   const [addAcademicSemester] = useCreateSemesterMutation();
 
-  const token = useAppSelector(selectCurrentToken);
-  console.log(token)
-
-
 
   const onSubmit : SubmitHandler<FieldValues> = async(data) => {
-
+    const toastId = toast("Creating...")
     const name = nameOptions[Number(data?.name)-1]?.label
 
     const semesterData = {
@@ -34,14 +31,19 @@ const CreateAcademicSemesters = () => {
      console.log(semesterData)
 
      try{
-      const res = await addAcademicSemester(semesterData);
-      console.log("res: ",res)
+      const res = await addAcademicSemester(semesterData) as TResponse;
+      // console.log("res: ",res)
+      if(res.error){
+        toast(res?.error?.data?.message, {id:toastId})
+      }
+      else{
+        toast('Semester Created', {id:toastId})
+      }
      }
      catch(err){
       console.log(err)
-      toast("Somethis went wrong!")
+      toast("Somethis went wrong!", {id:toastId})
      }
-
 
   } 
 

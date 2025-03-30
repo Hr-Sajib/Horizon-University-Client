@@ -11,8 +11,7 @@ import {Toaster} from "sonner"
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-        <Toaster/>
-
+      <Toaster/>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <RouterProvider router={router}/>

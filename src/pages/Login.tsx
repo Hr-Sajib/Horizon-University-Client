@@ -1,7 +1,7 @@
 import { FieldValues } from "react-hook-form";
 import { useLoginMutation } from "../redux/features/auth/authApi";
-import { useAppDispatch } from "../redux/hooks";
-import { setUser, TUser } from "../redux/features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { selectCurrentToken, selectCurrentUser, setUser, TUser } from "../redux/features/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -31,7 +31,7 @@ const Login = () => {
                 password: data.password
             }
             const result = await login(userInfo).unwrap();
-            console.log(result)
+            console.log('login req result: ',result)
     
             const decodedUser = verifyToken(result.data.accessToken) as TUser;
             console.log("decodedUser ",decodedUser)
@@ -44,7 +44,10 @@ const Login = () => {
             toast.error("Something went wrong!",{id:toastId})
         }
     }
- 
+    const token = useAppSelector(selectCurrentToken);
+    const user = useAppSelector(selectCurrentUser);
+    console.log(token)
+    console.log(user)
  
 
     return (
